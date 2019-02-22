@@ -1,0 +1,130 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+
+.wrapper {
+  padding: 15px 15px 30px 15px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 16px;
+  text-align: center;
+  margin-right: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.primary {
+  background-color: blue;
+}
+
+.danger {
+  background-color: red;
+}
+
+.input {
+  width: 50%;
+  padding: 5px 0px 5px 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+h3 {
+  margin: 0;
+}
+
+h5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.hero {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.styled-select {
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+  height: 29px;
+  overflow: hidden;
+  width: 240px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.styled-select select {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  height: 29px;
+  padding: 5px; /* If you add too much padding here, the options won't show in IE */
+  width: 268px;
+
+}
+
+.styled-select.slate {
+  background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+  height: 34px;
+  width: 240px;
+}
+
+.styled-select.slate select {
+  border: 1px solid #ccc;
+  font-size: 16px;
+  height: 34px;
+  width: 268px;
+}

@@ -1,0 +1,58 @@
+{
+  "name": "max-miner",
+  "description": "Mining Max token on MAX Exchange",
+  "author": "nobody",
+  "build": {
+    "appId": "taipei.kmt.max-miner",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "icon": "./public/icon.png",
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "./",
+  "main": "public/electron.js",
+  "dependencies": {
+    "bignumber.js": "^7.2.1",
+    "crypto-js": "^3.1.9-1",
+    "date-fns": "^1.29.0",
+    "electron-is-dev": "^1.0.1",
+    "foreman": "^3.0.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.5",
+    "shortid": "^2.2.13"
+  },
+  "scripts": {
+    "start": "nf start -p 3000",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-start": "node electron-wait-react",
+    "react-start": "react-scripts start",
+    "electron-pack": "build -c.extraMetadata.main=build/electron.js",
+    "preelectron-pack": "yarn build",
+    "postinstall": "electron-builder install-app-deps",
+    "clean": "rm -rf dist/ build/"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "electron": "^3.0.5",
+    "electron-builder": "^20.28.4"
+  }
+}
