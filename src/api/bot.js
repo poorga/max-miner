@@ -91,8 +91,9 @@ export async function miningMax({ market = 'mitheth', accessToken, customUpper, 
 
   // {"id":1691175,"price":"0.348","volume":"1.44","funds":"0.50112","market":"maxusdt","market_name":"MAX/USDT","created_at":1539942569,"side":"ask"}
   // cancel all
-  const cancelPayload = { market, nonce: Date.now(), };
-  const cancelResponse = await fetch(`${API_URL}/orders/clear`, {
+  const cancelPath = '/api/v2/orders/clear';
+  const cancelPayload = { market, nonce: Date.now(), path: cancelPath };
+  const cancelResponse = await fetch(`${API_URL}${cancelPath}`, {
     method: 'POST',
     headers: {
       ...v2Headers(accessToken, cancelPayload),
@@ -115,10 +116,10 @@ export async function miningMax({ market = 'mitheth', accessToken, customUpper, 
   }
 
   const baseEpsilon = Math.pow(10, -basePrecision);
-
-  const r1 = await fetch(`${API_URL}/members/me`, {
+  const profilePath = '/api/v2/members/me';
+  const r1 = await fetch(`${API_URL}${profilePath}`, {
     headers: {
-      ...v2Headers(accessToken, { nonce: Date.now(), }),
+      ...v2Headers(accessToken, { nonce: Date.now(), path: profilePath }),
     },
   }).then(res => res.json());
 
@@ -150,8 +151,10 @@ export async function miningMax({ market = 'mitheth', accessToken, customUpper, 
   // deal with precision
   const price = round(tradePrice, quotePrecision);
   const volume = round(tradeVolume, basePrecision);
+  const multiOrderPath = '/api/v2/orders/multi';
   const multiOrderPayload = {
     nonce: Date.now(),
+    path: multiOrderPath,
     market,
     orders: [
     {
@@ -167,7 +170,7 @@ export async function miningMax({ market = 'mitheth', accessToken, customUpper, 
       ord_type: 'limit',
     },
   ]};
-  const f = await fetch(`${API_URL}/orders/multi`, {
+  const f = await fetch(`${API_URL}${multiOrderPath}`, {
     method: 'POST',
     headers: {
       ...v2Headers(accessToken, multiOrderPayload),

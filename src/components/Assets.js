@@ -21,12 +21,13 @@ export default class ConfigForm extends Component {
 
   componentDidMount() {
     const { config: {apiKey, apiSecret } } = this.state;
-    console.log(apiKey, apiSecret)
+    const path = '/api/v2/members/me';
     const payload = {
       nonce: Date.now(),
+      path,
     };
     if (apiKey !== '' && apiSecret !== '') {
-      fetch(`${API_URL}/members/me`, {
+      fetch(`${API_URL}${path}`, {
         method: 'GET',
         headers: {
           ...v2Headers(`${apiKey}:${apiSecret}`, payload),

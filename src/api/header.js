@@ -10,7 +10,7 @@ const sign = (key, content) => {
 };
 
 
-export const API_URL = 'https://max-api.maicoin.com/api/v2';
+export const API_URL = 'https://max-api.maicoin.com';
 
 export const v2Headers = (accessToken, payload) => {
   if (!accessToken || accessToken === '') return {};
