@@ -5,23 +5,22 @@ import { format } from 'date-fns';
 BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 const MinimumAmount = {
-  twd:  10,      // TWD 最小下單金額    10.0TWD
-	btc:  0.00005, //BTC 最小下單金額    0.00005BTC
-	eth:  0.0005,  //ETH 最小下單金額    0.0005ETH
-	usdt: 0.5,     //USDT 最小下單金額    0.5USDT
-	max:  1.0,     //MAX 最小下單金額    1.0MAX
+  twd:  250,
+  btc:  0.0015,
+  eth:  0.05,
+  usdt: 8,
+  max:  100.0,
 };
 
 const difficulty = 0.5;
 
-// calculate trade price based on max and bitfinex bids/asks
 async function calculateTradePrice(market, quotePrecision, customUpper, customLower) {
   const { asks, bids } = await fetch(`${API_URL}/api/v2/depth?market=${market}`).then(res => res.json());
   if (asks.length === 0 || bids === 0) {
     return {
       error: {
         code: 1001,
-        message: 'There is no quoation.',
+        message: 'There is no quotation.',
       }
     };
   }
