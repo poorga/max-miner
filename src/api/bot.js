@@ -16,7 +16,7 @@ const difficulty = 0.5;
 
 // calculate trade price based on max and bitfinex bids/asks
 async function calculateTradePrice(market, quotePrecision, customUpper, customLower) {
-  const { asks, bids } = await fetch(`${API_URL}/depth?market=${market}`).then(res => res.json());
+  const { asks, bids } = await fetch(`${API_URL}/api/v2/depth?market=${market}`).then(res => res.json());
   if (asks.length === 0 || bids === 0) {
     return {
       error: {
@@ -51,14 +51,14 @@ const round = (num, precision) => parseFloat(BigNumber(num).toFixed(precision));
 
 export async function miningMax({ market = 'mitheth', accessToken, customUpper, customLower, }) {
   // get market info
-  const markets = await fetch(`${API_URL}/markets`).then(res => res.json());
+  const markets = await fetch(`${API_URL}/api/v2/markets`).then(res => res.json());
   const [ marketInfo ] = markets.filter(m => m.id === market);
   const { quote_unit: quote, base_unit: base, quote_unit_precision: quotePrecision, base_unit_precision: basePrecision } = marketInfo;
   const pair1 = quote === 'twdt' ? `usdt${quote}` : `${quote}usdt`;
   const pair2 = `${base}usdt`;
   let lastPrice = { usdtusdt: 1 };
   // get last price
-  const tradesResponse = await fetch(`${API_URL}/trades?market=maxusdt&limit=1`).then(res => res.json());
+  const tradesResponse = await fetch(`${API_URL}/api/v2/trades?market=maxusdt&limit=1`).then(res => res.json());
   if (!tradesResponse) {
     return {
       max: 0,
@@ -68,7 +68,7 @@ export async function miningMax({ market = 'mitheth', accessToken, customUpper, 
   lastPrice['maxusdt']= tradesResponse[0].price;
 
   if (pair1 !== 'maxusdt' && pair1 !== 'usdtusdt') {
-    const pair1Response = await fetch(`${API_URL}/trades?market=${pair1}&limit=1`).then(res => res.json());
+    const pair1Response = await fetch(`${API_URL}/api/v2/trades?market=${pair1}&limit=1`).then(res => res.json());
     if (!pair1Response) {
       return {
         max: 0,
@@ -78,7 +78,7 @@ export async function miningMax({ market = 'mitheth', accessToken, customUpper, 
     lastPrice[pair1] = pair1Response[0].price;
   }
   if (pair2 !== 'maxusdt' && pair2 !== 'usdtusdt') {
-    const pair2Response = await fetch(`${API_URL}/trades?market=${pair2}&limit=1`).then(res => res.json());
+    const pair2Response = await fetch(`${API_URL}/api/v2/trades?market=${pair2}&limit=1`).then(res => res.json());
     if (!pair2Response) {
       return {
         max: 0,
@@ -117,9 +117,10 @@ export async function miningMax({ market = 'mitheth', accessToken, customUpper, 
 
   const baseEpsilon = Math.pow(10, -basePrecision);
   const profilePath = '/api/v2/members/me';
-  const r1 = await fetch(`${API_URL}${profilePath}`, {
+  const nonce = Date.now();
+  const r1 = await fetch(`${API_URL}${profilePath}?nonce=${nonce}&path=${profilePath}`, {
     headers: {
-      ...v2Headers(accessToken, { nonce: Date.now(), path: profilePath }),
+      ...v2Headers(accessToken, { nonce, path: profilePath }),
     },
   }).then(res => res.json());
 

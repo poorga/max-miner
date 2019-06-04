@@ -27,7 +27,7 @@ export default class ConfigForm extends Component {
       path,
     };
     if (apiKey !== '' && apiSecret !== '') {
-      fetch(`${API_URL}${path}`, {
+      fetch(`${API_URL}${path}?nonce=${payload.nonce}&path=${payload.path}`, {
         method: 'GET',
         headers: {
           ...v2Headers(`${apiKey}:${apiSecret}`, payload),

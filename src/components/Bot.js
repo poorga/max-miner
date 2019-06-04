@@ -38,7 +38,7 @@ export default class ConfigForm extends Component {
     this.handleTestRun();
     this.timer = setTimeout(() => {
       this.loopRun();
-    },  10000);
+    },  3000);
   };
 
   handleRun = () => {

@@ -18,6 +18,7 @@ export const v2Headers = (accessToken, payload) => {
   const encodedPayload = base64Encode(payload);
   const [accessKey, secretKey] = accessToken.split(':');
   return {
+    "Access-Control-Allow-Origin": "*",
     'User-Agent': 'Mining MAX / v1.0',
     'Content-Type': 'application/json',
     'X-MAX-ACCESSKEY': accessKey,
