@@ -15,7 +15,7 @@
   },
   "version": "1.1.1",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://github.com/poorga/max-miner",
   "main": "public/electron.js",
   "dependencies": {
     "bignumber.js": "^7.2.1",
