@@ -52,7 +52,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^3.0.5",
+    "electron": "^18.3.7",
     "electron-builder": "^20.28.4"
   }
 }
